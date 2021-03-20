@@ -1,3 +1,4 @@
+import { BadRequestException } from '@nestjs/common';
 import { Transform } from 'class-transformer';
 
 type DecoratorHandle = ReturnType<PropertyDecorator>;
@@ -17,10 +18,10 @@ const valueToBoolean = (key: string, value: unknown): boolean => {
     }
 
     // eslint-disable-next-line unicorn/no-useless-undefined
-    throw new Error(`'${key}' must be a boolean value`);
+    throw new BadRequestException(`'${key}' must be a boolean value`);
 };
 
-const ToBoolean = (): ReflectionInformation => {
+const ToBooleanDecorator = (): ReflectionInformation => {
     const toPlain = Transform(
         ({ value }): unknown => {
             return value as unknown;
@@ -47,4 +48,6 @@ const ToBoolean = (): ReflectionInformation => {
     };
 };
 
-export { ToBoolean };
+export function ToBoolean(): ReflectionInformation {
+    return ToBooleanDecorator();
+}
