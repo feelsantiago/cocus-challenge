@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { GitClientService } from './git-client.service';
 import { Branch, Owner, Repository } from '../types/git.types';
 import { filterListMap } from '../utils/operators';
@@ -25,11 +26,20 @@ export class AppService {
                     const { owner, name } = repository;
                     return { name, owner: (owner as Owner).login };
                 },
+                (repository) =>
+                    this.getRepositoryBranches(username, repository.name).pipe(
+                        map((branches) => ({ ...repository, branches })),
+                    ),
             ),
         );
     }
 
     public getRepositoryBranches(username: string, repository: string): Observable<Branch[]> {
-        return this.gitClientService.listRepositoryBranches(username, repository);
+        return this.gitClientService.listRepositoryBranches(username, repository).pipe(
+            filterListMap(
+                () => true,
+                ({ name, commit }) => ({ name, commit }),
+            ),
+        );
     }
 }

@@ -110,4 +110,6 @@ export interface Repository {
     watchers: number;
     default_branch: string;
     permissions: Permissions;
+
+    branches: Branch[];
 }
