@@ -3,7 +3,6 @@ import { filter, map, mergeMap, switchMap, toArray } from 'rxjs/operators';
 
 type FilterFunction<T> = (data: T) => boolean;
 type MapFunction<T, R> = (data: T) => R;
-
 type MergeFunction<T> = (data: T) => Observable<T>;
 
 const filterListMapOperation = <T, R>(
