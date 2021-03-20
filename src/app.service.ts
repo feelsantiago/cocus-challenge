@@ -1,14 +1,26 @@
 import { Injectable } from '@nestjs/common';
 import { Observable } from 'rxjs';
 import { GitClientService } from './services/git-client.service';
-import { Repositories } from './types/git.types';
-import { filterList } from './utils/operators';
+import { Owner, Repository } from './types/git.types';
+import { filterListMap } from './utils/operators';
 
 @Injectable()
 export class AppService {
     constructor(private readonly gitClientService: GitClientService) {}
 
-    public getUserRepositories(username: string): Observable<Repositories[]> {
-        return this.gitClientService.listUserRepositories(username).pipe(filterList((repository) => !repository.fork));
+    public getUserRepositories(username: string, fullInformation = false): Observable<Partial<Repository>[]> {
+        return this.gitClientService.listUserRepositories(username).pipe(
+            filterListMap(
+                (repository) => !repository.fork,
+                (repository) => {
+                    if (fullInformation) {
+                        return repository;
+                    }
+
+                    const { owner, name } = repository;
+                    return { name, owner: (owner as Owner).login };
+                },
+            ),
+        );
     }
 }

@@ -1,15 +1,23 @@
-import { from, MonoTypeOperatorFunction, pipe } from 'rxjs';
-import { filter, switchMap, toArray } from 'rxjs/operators';
+import { from, OperatorFunction, pipe } from 'rxjs';
+import { filter, map, switchMap, toArray } from 'rxjs/operators';
 
 type FilterFunction<T> = (data: T) => boolean;
+type MapFunction<T, R> = (data: T) => R;
 
-const filterListOperation = <T>(fn: FilterFunction<T>): MonoTypeOperatorFunction<T[]> =>
+const filterListMapOperation = <T, R>(
+    predicate: FilterFunction<T>,
+    project: MapFunction<T, R>,
+): OperatorFunction<T[], R[]> =>
     pipe(
         switchMap((list) => from(list)),
-        filter(fn),
+        filter(predicate),
+        map(project),
         toArray(),
     );
 
-export function filterList<T>(fn: FilterFunction<T>): MonoTypeOperatorFunction<T[]> {
-    return filterListOperation(fn);
+export function filterListMap<T, R>(
+    predicate: FilterFunction<T>,
+    project: MapFunction<T, R>,
+): OperatorFunction<T[], R[]> {
+    return filterListMapOperation(predicate, project);
 }

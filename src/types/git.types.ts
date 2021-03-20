@@ -25,13 +25,13 @@ export interface Permissions {
     pull: boolean;
 }
 
-export interface Repositories {
+export interface Repository {
     id: number;
     node_id: string;
     name: string;
     full_name: string;
     private: boolean;
-    owner: Owner;
+    owner: Owner | string;
     html_url: string;
     description: string;
     fork: boolean;
