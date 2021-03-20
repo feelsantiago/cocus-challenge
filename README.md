@@ -53,6 +53,17 @@ $ npm run start:dev
 $ npm run start:prod
 ```
 
+## Running the app on docker
+
+```bash
+# production
+$ npm run start-docker
+
+# development watch mode
+$ npm run start-docker:dev
+
+```
+
 ## Test
 
 ```bash
