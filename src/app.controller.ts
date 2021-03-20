@@ -1,12 +1,14 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, Param } from '@nestjs/common';
+import { Observable } from 'rxjs';
 import { AppService } from './app.service';
+import { Repositories } from './types/git.types';
 
 @Controller()
 export class AppController {
     constructor(private readonly appService: AppService) {}
 
-    @Get()
-    public getHello(): string {
-        return this.appService.getHello();
+    @Get('repositories/:username')
+    public getHello(@Param('username') username: string): Observable<Repositories[]> {
+        return this.appService.getUserRepositories(username);
     }
 }
