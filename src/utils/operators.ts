@@ -5,7 +5,7 @@ type FilterFunction<T> = (data: T) => boolean;
 type MapFunction<T, R> = (data: T) => R;
 type MergeFunction<T> = (data: T) => Observable<T>;
 
-const filterListMapOperation = <T, R>(
+const filterListMapOperator = <T, R>(
     predicate: FilterFunction<T>,
     project: MapFunction<T, R>,
     merge?: MergeFunction<R>,
@@ -23,5 +23,5 @@ export function filterListMap<T, R>(
     project: MapFunction<T, R>,
     merge?: MergeFunction<R>,
 ): OperatorFunction<T[], R[]> {
-    return filterListMapOperation(predicate, project, merge);
+    return filterListMapOperator(predicate, project, merge);
 }
