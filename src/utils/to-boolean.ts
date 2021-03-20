@@ -17,7 +17,6 @@ const valueToBoolean = (key: string, value: unknown): boolean => {
         return false;
     }
 
-    // eslint-disable-next-line unicorn/no-useless-undefined
     throw new BadRequestException(`'${key}' must be a boolean value`);
 };
 
