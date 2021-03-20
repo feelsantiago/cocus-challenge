@@ -1,6 +1,5 @@
-import { HttpException, Injectable } from '@nestjs/common';
-import { Observable, throwError } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { Injectable } from '@nestjs/common';
+import { Observable } from 'rxjs';
 import { GitClientService } from './git-client.service';
 import { Owner, Repository } from '../types/git.types';
 import { filterListMap } from '../utils/operators';
@@ -22,11 +21,6 @@ export class AppService {
                     return { name, owner: (owner as Owner).login };
                 },
             ),
-            catchError((error) => this.handleError(error)),
         );
-    }
-
-    private handleError(error: { message: string; status: number }): Observable<never> {
-        return throwError(new HttpException(error.message || 'Git Client Error', error.status || 500));
     }
 }
