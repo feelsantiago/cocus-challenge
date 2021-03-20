@@ -8,8 +8,8 @@ import { Repository } from '../types/git.types';
 export class GitClientService {
     constructor(private readonly client: Octokit) {}
 
-    public listUserRepositories(username: string): Observable<Repository[]> {
-        return from(this.client.repos.listForUser({ username })).pipe(
+    public listUserRepositories(username: string, page?: number, perPage?: number): Observable<Repository[]> {
+        return from(this.client.repos.listForUser({ username, page, per_page: perPage })).pipe(
             pluck('data'),
             map((data) => data as Repository[]),
             catchError((error) => this.handleError(error)),

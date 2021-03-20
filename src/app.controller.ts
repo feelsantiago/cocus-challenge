@@ -15,6 +15,6 @@ export class AppController {
         @Param('username') username: string,
         @Query() query: RepositoryQueryDto,
     ): Observable<Partial<Repository>[]> {
-        return this.appService.getUserRepositories(username, query.fullInformation);
+        return this.appService.getUserRepositories(username, query.fullInformation, query.page, query.perPage);
     }
 }

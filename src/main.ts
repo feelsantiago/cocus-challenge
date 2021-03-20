@@ -1,5 +1,5 @@
 import { Logger, ValidationPipe } from '@nestjs/common';
-import { NestFactory } from '@nestjs/core';
+import { HttpAdapterHost, NestFactory } from '@nestjs/core';
 import helmet from 'helmet';
 import morgan from 'morgan';
 import { AppModule } from './app.module';
@@ -24,12 +24,15 @@ async function bootstrap(): Promise<void> {
 
     app.useGlobalPipes(
         new ValidationPipe({
+            transform: true,
             forbidUnknownValues: true,
             validationError: { target: false, value: true },
+            transformOptions: { enableImplicitConversion: true },
         }),
     );
 
-    app.useGlobalFilters(new AllExceptionsFilter());
+    const httpHost = app.get<HttpAdapterHost>(HttpAdapterHost);
+    app.useGlobalFilters(new AllExceptionsFilter(httpHost.httpAdapter));
 
     await app.listen(3000);
 }

@@ -8,8 +8,13 @@ import { filterListMap } from '../utils/operators';
 export class AppService {
     constructor(private readonly gitClientService: GitClientService) {}
 
-    public getUserRepositories(username: string, fullInformation = false): Observable<Partial<Repository>[]> {
-        return this.gitClientService.listUserRepositories(username).pipe(
+    public getUserRepositories(
+        username: string,
+        fullInformation = false,
+        page?: number,
+        perPage?: number,
+    ): Observable<Partial<Repository>[]> {
+        return this.gitClientService.listUserRepositories(username, page, perPage).pipe(
             filterListMap(
                 (repository) => !repository.fork,
                 (repository) => {
