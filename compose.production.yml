@@ -1,0 +1,13 @@
+version: '3.8'
+
+services:
+    cocus-challenge:
+        build:
+            context: .
+            target: production
+        container_name: cocus-challenge
+        env_file:
+            - .env
+        command: ['node', 'dist/main.js']
+        ports:
+            - ${API_PORT}:3000

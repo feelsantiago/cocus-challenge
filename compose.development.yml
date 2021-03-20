@@ -1,0 +1,16 @@
+version: '3.8'
+
+services:
+    cocus-challenge:
+        build:
+            context: .
+            target: development
+        container_name: cocus-challenge
+        volumes:
+            - /usr/src/app/node_modules
+            - .:/usr/src/app
+        env_file:
+            - .env
+        command: ['npm', 'run', 'start:dev']
+        ports:
+            - ${API_PORT}:3000
