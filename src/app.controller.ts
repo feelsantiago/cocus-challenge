@@ -1,10 +1,12 @@
-import { Controller, Get, Param, Query } from '@nestjs/common';
+import { Controller, Get, Param, Query, UseGuards } from '@nestjs/common';
 import { Observable } from 'rxjs';
-import { AppService } from './app.service';
+import { AppService } from './services/app.service';
 import { RepositoryQueryDto } from './dtos/repository-query.dto';
+import { AcceptHeaderGuard } from './guards/accept-header.guard';
 import { Repository } from './types/git.types';
 
 @Controller()
+@UseGuards(AcceptHeaderGuard)
 export class AppController {
     constructor(private readonly appService: AppService) {}
 
