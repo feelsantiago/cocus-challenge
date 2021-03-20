@@ -1,10 +1,26 @@
-import { Provider } from '@nestjs/common';
+import { Logger, Provider } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
 import { Octokit } from '@octokit/rest';
 
 export const appProviders: Provider[] = [
     {
         provide: Octokit,
-        useFactory: () => new Octokit({ auth: 'f5966d5b536cd5fcaae303be842deef12a8b0d07' }),
-        inject: [],
+        useFactory: (configService: ConfigService): Octokit => {
+            const logger = new Logger('GitClient');
+            const token = configService.get<string>('GIT_PERSONAL_ACCESS_TOKEN');
+
+            const client = new Octokit({
+                auth: token,
+                log: {
+                    debug: () => {},
+                    info: (message) => logger.log(message),
+                    warn: (message) => logger.warn(message),
+                    error: (message) => logger.error(message),
+                },
+            });
+
+            return client;
+        },
+        inject: [ConfigService],
     },
 ];
