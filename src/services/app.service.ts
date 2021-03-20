@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { Observable } from 'rxjs';
 import { GitClientService } from './git-client.service';
-import { Owner, Repository } from '../types/git.types';
+import { Branch, Owner, Repository } from '../types/git.types';
 import { filterListMap } from '../utils/operators';
 
 @Injectable()
@@ -27,5 +27,9 @@ export class AppService {
                 },
             ),
         );
+    }
+
+    public getRepositoryBranches(username: string, repository: string): Observable<Branch[]> {
+        return this.gitClientService.listRepositoryBranches(username, repository);
     }
 }

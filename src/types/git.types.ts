@@ -25,6 +25,16 @@ export interface Permissions {
     pull: boolean;
 }
 
+export interface Commit {
+    sha: string;
+    url: string;
+}
+
+export interface Branch {
+    name: string;
+    commit: Commit;
+}
+
 export interface Repository {
     id: number;
     node_id: string;

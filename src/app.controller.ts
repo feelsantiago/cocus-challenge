@@ -11,7 +11,7 @@ export class AppController {
     constructor(private readonly appService: AppService) {}
 
     @Get('repositories/:username')
-    public getHello(
+    public repositories(
         @Param('username') username: string,
         @Query() query: RepositoryQueryDto,
     ): Observable<Partial<Repository>[]> {
