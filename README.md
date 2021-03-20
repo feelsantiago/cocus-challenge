@@ -1,4 +1,4 @@
-  <p align="center">Code challenge for selective process on <a href="https://www.linkedin.com/company/cocus/" target="blank">Cocus</a></p>
+  <p align="center">Code challenge for hiring process on <a href="https://www.linkedin.com/company/cocus/" target="blank">Cocus</a></p>
 
   <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
   [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
