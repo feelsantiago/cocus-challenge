@@ -27,6 +27,6 @@ export class AppService {
     }
 
     private handleError(error: { message: string; status: number }): Observable<never> {
-        return throwError(new HttpException(error.message, error.status));
+        return throwError(new HttpException(error.message || 'Git Client Error', error.status || 500));
     }
 }
