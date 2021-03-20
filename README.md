@@ -62,6 +62,10 @@ $ npm run test:e2e
 $ npm run test:cov
 ```
 
+## Documentation
+
+After run the project you can go to `http://localhost:3000/api` to se the [Swagger](https://swagger.io/) documentation.
+
 ## License
 
 Nest is [MIT licensed](LICENSE).
