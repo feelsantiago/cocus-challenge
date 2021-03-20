@@ -26,6 +26,8 @@
   <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
   [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
 
+---
+
 GitHub Action CI Status: [![build/lint - CI](https://github.com/feelsantiago/cocus-challenge/actions/workflows/github-ci.yml/badge.svg?branch=master)](https://github.com/feelsantiago/cocus-challenge/actions/workflows/github-ci.yml)
 
 ## Description
