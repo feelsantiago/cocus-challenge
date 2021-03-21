@@ -34,8 +34,6 @@ describe('AppController (e2e)', () => {
             .set('Accept', 'application/json')
             .send();
 
-        console.log(process.env);
-
         expect(res.header['content-type']).toContain('application/json');
         expect(res.status).toBe(200);
 
