@@ -28,6 +28,10 @@ describe('AppController (e2e)', () => {
         await app.init();
     });
 
+    afterAll(async () => {
+        await app.close();
+    });
+
     it('/repositories/:username (GET) Content-Type: application/json', async () => {
         const res = await request(app.getHttpServer())
             .get(`/repositories/${username}`)
