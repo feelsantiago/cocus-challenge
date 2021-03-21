@@ -50,3 +50,7 @@ const ToBooleanDecorator = (): ReflectionInformation => {
 export function ToBoolean(): ReflectionInformation {
     return ToBooleanDecorator();
 }
+
+export function parseValueToBoolean(value: unknown): boolean {
+    return valueToBoolean('', value);
+}
