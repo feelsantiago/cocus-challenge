@@ -71,7 +71,7 @@ describe('AppController (e2e)', () => {
 
     it('/repositories/:username?fullInformation=false (GET)', async () => {
         const res = await request(app.getHttpServer())
-            .get(`/repositories/${username}?fullIformation=false`)
+            .get(`/repositories/${username}?fullInformation=false`)
             .set('Accept', 'application/json')
             .send();
 
